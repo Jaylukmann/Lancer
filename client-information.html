@@ -479,10 +479,10 @@ var contactemail = document.getElementById("contactemail");
 
 // check if any input is empty.
 function checkForm() {
-    if((companyname.value.length = 0 || streetname.value.length == 0 ||
-        strnumber.value.length == 0 || city.value.length == 0 ||
-        postalcode.value.length == 0 || state.value.length == 0
-        || contactme.value.length == 0 || contactemail.value.length == 0)){
+    if((companyname.value.length = 0 && streetname.value.length == 0 &&
+        strnumber.value.length == 0 && city.value.length == 0 &&
+        postalcode.value.length == 0 && state.value.length == 0
+        && contactme.value.length == 0 &&    contactemail.value.length == 0)){
                
         document.getElementById("errorMsg").style.display ="block"; 
     }
