@@ -179,7 +179,7 @@ h3:last-of-type {
            <h1>Client Information</h1>
            <form autocomplete="on" action="" method="post" onsubmit="checkForm()">
             <div>
-                    <p class="error" id="errorMsg">All Fields Required</p>
+                    <p class="error" id="errorMsg"></p>
             <h3> Business Information</h3> 
             
                <label for="company-name">Company name</label> 
@@ -457,7 +457,7 @@ h3:last-of-type {
                 <p class="error" id="errorEmail"></p>
                 <br>
                 <h4>Add other contacts</h4>
-                <button type="submit" id="Create">Create Invoice</button>
+                <button type="submit" id="create">Create Invoice</button>
               </div>
                    
                
@@ -467,6 +467,7 @@ h3:last-of-type {
        <script>
     
          // ================================== Validation =============================================
+
 var companyname = document.getElementById("companyname");
 var streetname = document.getElementById("streetname");
 var strnumber = document.getElementById("strnumber");
@@ -476,62 +477,97 @@ var country = document.getElementById("country");
 var state = document.getElementById("state");
 var contactme = document.getElementById("contactname");
 var contactemail = document.getElementById("contactemail");
+var submit = document.getElementById("create");
 
 // check if any input is empty.
-function checkForm() {
-    if((companyname.value.length = 0 && streetname.value.length == 0 &&
-        strnumber.value.length == 0 && city.value.length == 0 &&
-        postalcode.value.length == 0 && state.value.length == 0
-        && contactme.value.length == 0 &&    contactemail.value.length == 0)){
-               
-        document.getElementById("errorMsg").style.display ="block"; 
+function checkForm() { 
+    if(companyname.value.length == 0 ){
+     document.getElementById("errorMsg").textContent = "All Fields are required!"; 
+     document.getElementById("errorMsg").style.display = "block";  
+    }
+    else if(streetname.value.length == 0 ){
+     document.getElementById("errorMsg").textContent = "All Fields are required!"; 
+     document.getElementById("errorMsg").style.display = "block";  
+    }
+    else if(strnumber.value.length == 0 ){
+     document.getElementById("errorMsg").textContent = "All Fields are required!"; 
+     document.getElementById("errorMsg").style.display = "block";  
+    }
+   else if(city.value.length == 0 ){
+     document.getElementById("errorMsg").textContent = "All Fields are required!"; 
+     document.getElementById("errorMsg").style.display = "block";  
+    }
+    else if(postalcode.value.length == 0 ){
+     document.getElementById("errorMsg").textContent = "All Fields are required!"; 
+     document.getElementById("errorMsg").style.display = "block";  
+    }
+    else if(country.value.length == 0 ){
+     document.getElementById("errorMsg").textContent = "All Fields are required!"; 
+     document.getElementById("errorMsg").style.display = "block";  
+    }
+    else if(state.value.length == 0 ){
+     document.getElementById("errorMsg").textContent = "All Fields are required!"; 
+     document.getElementById("errorMsg").style.display = "block";  
+    }
+    else if(contactme.value.length == 0 ){
+     document.getElementById("errorMsg").textContent = "All Fields are required!"; 
+     document.getElementById("errorMsg").style.display = "block";  
     }
     else {
-        document.getElementById("errorMsg").style.display ="none";   
+    document.getElementById("errorMsg").style.display = "block"; 
+    document.getElementById("errorMsg").textContent = "Correct! Create An Invoice";
+    document.getElementById("errorMsg").style.color = "blue";
     }
 }
-
-function removeNameErrorWhenCorrecting() { 
-    
-    document.getElementById("errorMsg").style.display = "none";
+function showErrorMsg(){
+    document.getElementById("errorMsg").textContent = "All Fields are required!"; 
+     document.getElementById("errorMsg").style.display = "block"; 
 }
+
+
+
+//=========================Effects of blur and focus========================
 
 if (companyname.addEventListener) {
     companyname.addEventListener('blur', checkForm, false);
-    companyname.addEventListener('focus', removeNameErrorWhenCorrecting, false);
+    companyname.addEventListener('focus',showErrorMsg , true);
 }
 else if (streetname.addEventListener) {
     streetname.addEventListener('blur', checkForm, false);
-    streetname.addEventListener('focus', removeNameErrorWhenCorrecting, false);
+    streetname.addEventListener('focus', showErrorMsg, true);
 }
 else if (strnumber.addEventListener) {
     strnumber.addEventListener('blur', checkForm, false);
-    strnumber.addEventListener('focus', removeNameErrorWhenCorrecting, false);
+    strnumber.addEventListener('focus', showErrorMsg, true);
 }
 else if (city.addEventListener) {
     city.addEventListener('blur', checkForm, false);
-    city.addEventListener('focus', removeNameErrorWhenCorrecting, false);
+    city.addEventListener('focus', showErrorMsg, true);
 }
 else if (postalcode.addEventListener) {
     postalcode.addEventListener('blur', checkForm, false);
-    postalcode.addEventListener('focus', removeNameErrorWhenCorrecting, false);
+    postalcode.addEventListener('focus', showErrorMsg, true);
 }
 else if (country.addEventListener) {
     country.addEventListener('blur', checkForm, false);
-    country.addEventListener('focus', removeNameErrorWhenCorrecting, false);
+    country.addEventListener('focus', showErrorMsg, true);
 }
 else if (state.addEventListener) {
     state.addEventListener('blur', checkForm, false);
-    state.addEventListener('focus', removeNameErrorWhenCorrecting, false);
+    state.addEventListener('focus', showErrorMsg, true);
 }
 else if (contactme.addEventListener) {
     contactme.addEventListener('blur', checkForm, false);
-    contactme.addEventListener('focus', removeNameErrorWhenCorrecting, false);
+    contactme.addEventListener('focus', showErrorMsg, true);
 }
 else if (contactemail.addEventListener) {
     contactemail.addEventListener('blur', checkForm, false);
-    contactemail.addEventListener('focus', removeNameErrorWhenCorrecting, false);
+    contactemail.addEventListener('focus', showErrorMsg, true);
+}else{
+    addEventListener('blur', checkForm, true);
+    addEventListener('focus',showErrorMsg , false);
 }
+
 
  
       
@@ -544,15 +580,11 @@ function checkEmailField() {
 
     if (contactemail.value.indexOf("@", 0) < 0) {
         document.getElementById("errorEmail").style.display = "block";
-        document.getElementById("errorEmail").textContent = "Your email address does not have an '@' symbol!";
-           
-     
+        document.getElementById("errorEmail").textContent = "Your email address does not have an '@' symbol!";  
     } 
     else if (contactemail.value.indexOf(".", 0) < 0) {
         document.getElementById("errorEmail").style.display = "block";
-        document.getElementById("errorEmail").textContent = "A '.' symbol is missing in your email address, please check!";
-
-        
+        document.getElementById("errorEmail").textContent = "A '.' symbol is missing in your email address, please check!";    
     }
     else if (mailFormat.test(contactemail.value) == false) {
         document.getElementById("errorEmail").style.display = "block";
@@ -566,16 +598,24 @@ function checkEmailField() {
     }
 }
 
-function removeEmailErrorWhenCorrecting() {
+function hideEmailError() {
     document.getElementById("errorEmail").style.display = "none";
 }
 
 if (contactemail.addEventListener) {
     contactemail.addEventListener('blur', checkEmailField, false);
-    contactemail.addEventListener('focus', removeEmailErrorWhenCorrecting, false);
+    contactemail.addEventListener('focus', hideEmailError, false);
 }
-
-       </script>
+function showSuccess() {
+    document.getElementById("errorMsg").style.display = "block"; 
+    document.getElementById("errorMsg").textContent = "Correct! Create An Invoice";
+    document.getElementById("errorMsg").style.color = "blue";
+    document.getElementById("errorMsg").style.fontSize = "2em";
+}
+if (submit.addEventListener) {
+submit.addEventListener("mouseover", showSuccess);
+}
+</script>
     </body>
     
     <footer></footer>
